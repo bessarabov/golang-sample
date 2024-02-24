@@ -5,6 +5,7 @@ on:
     tags:
       - '*'
 
+jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
