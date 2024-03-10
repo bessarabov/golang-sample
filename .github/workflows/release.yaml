@@ -32,7 +32,7 @@ jobs:
           go build -o hello_${{ github.ref_name }}_x86_64 .
 
 
-      - name: Create release_body.txt
+      - name: Create release_description.txt
         run: |
           ./.github/workflows/create_github_release_description.pl ${{ github.ref_name }}
 
