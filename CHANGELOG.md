@@ -1,6 +1,10 @@
 # Changelog for golang-sample
 
 ```
+0.0.18  2024-03-10
+        Release 18 line 1
+        Release 18 line 2
+
 0.0.17  2024-03-10
         Release 17 line 1
         Release 17 line 2
