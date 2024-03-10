@@ -31,15 +31,16 @@ jobs:
         run: |
           GOOS=darwin GOARCH=arm64 go build -o hello_${{ github.ref_name }}_arm64 .
 
-      - name: perl -v
+      - name: Create release_body.txt
         run: |
+          cat CHANGELOG.md |grep '0.0.14 ' -A 10000|perl -nalE 'if ($. == 1) { say } else { if (/^\d+\.\d+\.\d+\s+/) { exit } else { say } }' > release_body.txt
           perl -v
 
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          body_path: tmp.txt
+          body_path: release_body.txt
           files: |
             hello_${{ github.ref_name }}_x86_64
             hello_${{ github.ref_name }}_arm64
