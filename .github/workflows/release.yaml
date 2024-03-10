@@ -19,10 +19,20 @@ jobs:
         with:
           go-version: 1.22
 
-      - name: Build
-        run: |
-          go build -o hello_${{ github.ref_name }} .
 
-      - name: Run
+      - name: Build x86_64
         run: |
-          ./hello_${{ github.ref_name }}
+          go build -o hello_${{ github.ref_name }}_x86_64 .
+
+      - name: Run x86_64
+        run: |
+          ./hello_${{ github.ref_name }}_x86_64
+
+
+      - name: Build arm64
+        run: |
+          GOOS=darwin GOARCH=arm64 go build -o hello_${{ github.ref_name }}_arm64 .
+
+      - name: Run arm64
+        run: |
+          ./hello_${{ github.ref_name }}_arm64
