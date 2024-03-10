@@ -25,4 +25,4 @@ jobs:
 
       - name: Run
         run: |
-          ./hello_hello_${{ github.ref_name }}
+          ./hello_${{ github.ref_name }}
