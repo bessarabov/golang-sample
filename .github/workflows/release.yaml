@@ -23,19 +23,18 @@ jobs:
           go-version: 1.22
 
 
-      - name: Build x86_64 (Intel-based Macs)
-        run: |
-          go build -o hello_${{ github.ref_name }}_x86_64 .
-
       - name: Build arm64 (Apple Silicon Macs)
         run: |
           GOOS=darwin GOARCH=arm64 go build -o hello_${{ github.ref_name }}_arm64 .
 
+      - name: Build x86_64 (Intel-based Macs)
+        run: |
+          go build -o hello_${{ github.ref_name }}_x86_64 .
+
+
       - name: Create release_body.txt
         run: |
-          cat CHANGELOG.md |grep '0.0.14 ' -A 10000|perl -nalE 'if ($. == 1) { say } else { if (/^\d+\.\d+\.\d+\s+/) { exit } else { say } }' > release_body.txt
-          perl -v
-
+          ./.github/workflows/create_github_release_description.pl ${{ github.ref_name }}
 
       - name: Release
         uses: softprops/action-gh-release@v2
